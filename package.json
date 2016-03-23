@@ -1,0 +1,15 @@
+{
+  "name": "coredump-water-sensor-admin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "repository": "",
+  "license": "ISC",
+  "dependencies": {
+    "ng-admin": "^0.9.1"
+  }
+}
