@@ -65,6 +65,12 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     admin.addEntity(sensor);
     admin.addEntity(measurement);
 
+    admin.menu(nga.menu()
+        .addChild(nga.menu(sponsor).icon('<span class="glyphicon glyphicon-user"></span>'))
+        .addChild(nga.menu(sensor).icon('<span class="glyphicon glyphicon-cloud"></span>'))
+        .addChild(nga.menu(measurement).icon('<span class="glyphicon glyphicon-list"></span>'))
+    );
+
     // attach the admin application to the DOM and execute it
     nga.configure(admin);
 }]);
