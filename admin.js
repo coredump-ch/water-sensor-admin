@@ -16,15 +16,6 @@ adminApp.config(['NgAdminConfigurationProvider', function (nga) {
             .targetEntity(sensor)
             .targetField(nga.field('id'))
     ]);
-    sponsor.showView().fields([
-        nga.field('id'),
-        nga.field('name'),
-        nga.field('description', 'text'),
-        nga.field('active', 'boolean'),
-        nga.field('sensor_ids', 'reference_many')
-            .targetEntity(sensor)
-            .targetField('id')
-    ]);
     sponsor.creationView().fields([
         nga.field('name'),
         nga.field('description', 'text'),
@@ -42,7 +33,6 @@ adminApp.config(['NgAdminConfigurationProvider', function (nga) {
             .targetField(nga.field('name'))
             .label('Sponsor')
     ]);
-    sensor.showView().fields(sensor.listView().fields());
     sensor.creationView().fields([
         nga.field('device_name'),
         nga.field('caption'),
