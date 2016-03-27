@@ -1,8 +1,7 @@
-// declare a new module called 'myApp', and make it require the `ng-admin` module as a dependency
-var myApp = angular.module('myApp', ['ng-admin']);
+var adminApp = angular.module('adminApp', ['ng-admin']);
 
 // declare a function to run when the module bootstraps (during the 'config' phase)
-myApp.config(['NgAdminConfigurationProvider', function (nga) {
+adminApp.config(['NgAdminConfigurationProvider', function (nga) {
     var admin = nga.application('Coredump Watersensor API').baseApiUrl('http://localhost:3000/api/');
 
     var sponsor = nga.entity('sponsors').updateMethod('patch');
