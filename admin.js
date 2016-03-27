@@ -12,13 +12,19 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     sponsor.listView().fields([
         nga.field('id'),
         nga.field('name'),
-        nga.field('active', 'boolean')
+        nga.field('active', 'boolean'),
+        nga.field('sensor_ids', 'reference_many')
+            .targetEntity(sensor)
+            .targetField(nga.field('id'))
     ]);
     sponsor.showView().fields([
         nga.field('id'),
         nga.field('name'),
         nga.field('description', 'text'),
-        nga.field('active', 'boolean')
+        nga.field('active', 'boolean'),
+        nga.field('sensor_ids', 'reference_many')
+            .targetEntity(sensor)
+            .targetField('id')
     ]);
     sponsor.creationView().fields([
         nga.field('name'),
