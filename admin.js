@@ -3,17 +3,60 @@ var myApp = angular.module('myApp', ['ng-admin']);
 
 // declare a function to run when the module bootstraps (during the 'config' phase)
 myApp.config(['NgAdminConfigurationProvider', function (nga) {
-    // create an admin application
     var admin = nga.application('Coredump Watersensor API').baseApiUrl('http://localhost:3000/api/');
 
-    // create a measurements entity
-    // the API endpoint for this entity will be 'http://jsonplaceholder.typicode.com/measurements/:id
-    var measurement = nga.entity('measurements');
-    // set the fields of the user entity list view
-    measurement.listView().fields([
-        nga.field('temperature')
+    var sponsor = nga.entity('sponsors').updateMethod('patch');
+    var sensor = nga.entity('sensors').updateMethod('patch');
+    var measurement = nga.entity('measurements').updateMethod('patch');
+
+    sponsor.listView().fields([
+        nga.field('id'),
+        nga.field('name'),
+        nga.field('active', 'boolean')
     ]);
-    // add the user entity to the admin application
+    sponsor.showView().fields([
+        nga.field('id'),
+        nga.field('name'),
+        nga.field('description', 'text'),
+        nga.field('active', 'boolean')
+    ]);
+    sponsor.creationView().fields([
+        nga.field('name'),
+        nga.field('description', 'text'),
+        nga.field('active', 'boolean')
+    ]);
+    sponsor.editionView().fields(sponsor.creationView().fields());
+
+    sensor.listView().fields([
+        nga.field('id'),
+        nga.field('device_name'),
+        nga.field('caption'),
+        nga.field('location'),
+        nga.field('sponsor_id', 'reference')
+            .targetEntity(sponsor)
+            .targetField(nga.field('name'))
+            .label('Sponsor')
+    ]);
+    sensor.showView().fields(sensor.listView().fields());
+    sensor.creationView().fields([
+        nga.field('device_name'),
+        nga.field('caption'),
+        nga.field('location')
+    ]);
+    sensor.editionView().fields(sensor.creationView().fields());
+
+    measurement.listView().fields([
+        nga.field('id'),
+        nga.field('temperature'),
+        nga.field('created_at', 'datetime'),
+        nga.field('sensor_id', 'reference')
+            .targetEntity(sensor)
+            .targetField(nga.field('caption'))
+            .label('Sensor')
+    ]);
+
+    admin.addEntity(sponsor);
+    admin.addEntity(sensor);
     admin.addEntity(measurement);
 
     // attach the admin application to the DOM and execute it
