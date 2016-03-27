@@ -19,7 +19,11 @@ adminApp.config(['NgAdminConfigurationProvider', function (nga) {
     sponsor.creationView().fields([
         nga.field('name'),
         nga.field('description', 'text'),
-        nga.field('active', 'boolean')
+        nga.field('active', 'boolean'),
+        nga.field('sensor_ids', 'reference_many')
+            .targetEntity(sensor)
+            .targetField(nga.field('device_name'))
+            .label('Devices')
     ]);
     sponsor.editionView().fields(sponsor.creationView().fields());
 
