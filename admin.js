@@ -50,7 +50,7 @@ adminApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field('created_at', 'datetime'),
         nga.field('sensor_id', 'reference')
             .targetEntity(sensor)
-            .targetField(nga.field('caption'))
+            .targetField(nga.field('device_name'))
             .label('Sensor')
     ]);
 
