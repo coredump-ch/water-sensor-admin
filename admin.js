@@ -1,9 +1,12 @@
 var adminApp = angular.module('adminApp', ['ng-admin']);
 
+adminApp.config(['RestangularProvider', function(RestangularProvider) {
+    var token = window.prompt('Please specify API token', '0123456789ABCDEF');
+    RestangularProvider.setDefaultHeaders({'Authorization': 'Token token=' + token});
+}]);
+
 // declare a function to run when the module bootstraps (during the 'config' phase)
 adminApp.config(['NgAdminConfigurationProvider', function (nga) {
-    var admin = nga.application('Coredump Watersensor API').baseApiUrl('http://localhost:3000/api/');
-
     var sponsor = nga.entity('sponsors').updateMethod('patch');
     var sensor = nga.entity('sensors').updateMethod('patch');
     var measurement = nga.entity('measurements').updateMethod('patch');
@@ -56,6 +59,10 @@ adminApp.config(['NgAdminConfigurationProvider', function (nga) {
             .label('Sensor')
     ]);
 
+    // Configure Application
+    var admin = nga.application('Coredump Watersensor API').baseApiUrl('http://localhost:3000/api/');
+
+    // Configure Menus
     admin.addEntity(sponsor);
     admin.addEntity(sensor);
     admin.addEntity(measurement);
