@@ -31,8 +31,8 @@ adminApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field('id'),
         nga.field('device_name'),
         nga.field('caption'),
-        nga.field('latitude', 'number'),
-        nga.field('longitude', 'number'),
+        nga.field('latitude', 'number').format('0.0000'),
+        nga.field('longitude', 'number').format('0.0000'),
         nga.field('sponsor_id', 'reference')
             .targetEntity(sponsor)
             .targetField(nga.field('name'))
@@ -41,8 +41,8 @@ adminApp.config(['NgAdminConfigurationProvider', function (nga) {
     sensor.creationView().fields([
         nga.field('device_name'),
         nga.field('caption'),
-        nga.field('latitude', 'number'),
-        nga.field('longitude', 'number')
+        nga.field('latitude', 'number').format('0.0000'),
+        nga.field('longitude', 'number').format('0.0000')
     ]);
     sensor.editionView().fields(sensor.creationView().fields());
 
