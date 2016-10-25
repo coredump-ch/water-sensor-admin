@@ -3,6 +3,12 @@ var adminApp = angular.module('adminApp', ['ng-admin']);
 adminApp.config(['RestangularProvider', function(RestangularProvider) {
     var token = window.prompt('Please specify API token', '0123456789ABCDEF');
     RestangularProvider.setDefaultHeaders({'Authorization': 'Token token=' + token});
+    RestangularProvider.addRequestInterceptor(function(element, operation, what, url){
+        if (operation == 'post' || operation == 'patch') {
+            return {[what.slice(0, -1)]: element}
+        }
+        return element
+    });
 }]);
 
 // declare a function to run when the module bootstraps (during the 'config' phase)
