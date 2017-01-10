@@ -64,6 +64,15 @@ adminApp.config(['NgAdminConfigurationProvider', function (nga) {
       .targetField(nga.field('device_name'))
       .label('Sensor')
   ]);
+  measurement.creationView().fields([
+    nga.field('temperature'),
+    nga.field('created_at', 'datetime'),
+    nga.field('sensor_id', 'reference')
+      .targetEntity(sensor)
+      .targetField(nga.field('device_name'))
+      .label('Sensor')
+  ]);
+  measurement.editionView().fields(measurement.creationView().fields());
 
   // Configure Application
   var admin = nga.application('Coredump Watersensor API').baseApiUrl('http://localhost:3000/api/');
